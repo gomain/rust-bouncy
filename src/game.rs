@@ -81,7 +81,7 @@ impl Display for Game {
     fn fmt(&self, fmt: &mut Formatter) -> std::fmt::Result {
         use std::convert::TryFrom;
         let width: usize = usize::try_from(self.frame.width).unwrap();
-        let top = |fmt: &mut Formatter| write!(fmt, "+{}+", "--".repeat(width));
+        let top = |fmt: &mut Formatter| writeln!(fmt, "+{}+", "--".repeat(width));
         let bottom = top;
         let inbetweens = |fmt: &mut Formatter, col: Option<u32>| {
             let the_ball = vec![0xF0, 0x9F, 0x8E, 0x83];
@@ -93,7 +93,7 @@ impl Display for Game {
             };
             let post_ball =
                 "  ".repeat(usize::try_from(self.frame.width - col.unwrap_or(0) - 1).unwrap());
-            write!(fmt, "|{}{}{}|", pre_ball, ball, post_ball)
+            writeln!(fmt, "|{}{}{}|", pre_ball, ball, post_ball)
         };
         top(fmt)?;
         for row in 0..self.frame.height {
