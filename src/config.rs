@@ -13,18 +13,20 @@ pub enum ParseError {
     InvalidInteger(String),
 }
 
-pub struct ParseArgs(Args);
+pub struct ParseArgs {
+    args: Args,
+}
 
 impl Iterator for ParseArgs {
     type Item = String;
     fn next(&mut self) -> Option<String> {
-        self.0.next()
+        self.args.next()
     }
 }
 
 impl ParseArgs {
     pub fn new(args: Args) -> ParseArgs {
-        ParseArgs(args)
+        ParseArgs { args }
     }
 
     pub fn get_config(&mut self) -> Result<Config, ParseError> {
