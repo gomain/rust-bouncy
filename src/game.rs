@@ -10,9 +10,9 @@ enum HorizDir {
     Right,
 }
 
-struct Ball {
-    x: u32,
-    y: u32,
+pub struct Ball {
+    pub x: u32,
+    pub y: u32,
     vert_dir: VertDir,
     horiz_dir: HorizDir,
 }
@@ -44,14 +44,14 @@ impl Ball {
 }
 
 #[derive(Debug)]
-struct Frame {
+pub struct Frame {
     pub width: u32,
     pub height: u32,
 }
 
 pub struct Game {
-    frame: Frame,
-    ball: Ball,
+    pub frame: Frame,
+    pub ball: Ball,
 }
 
 impl Game {
