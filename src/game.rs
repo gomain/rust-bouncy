@@ -41,6 +41,10 @@ impl Ball {
             VertDir::Down => self.y += 1,
         }
     }
+
+    pub fn get_xy(&self) -> (u32, u32) {
+        (self.x, self.y)
+    }
 }
 
 #[derive(Debug)]
