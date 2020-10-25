@@ -31,13 +31,16 @@ impl Curses {
         }
     }
 
-    fn run(&mut self) -> ! {
+    fn run(&mut self) {
         self.draw_all();
-        loop {
-            std::thread::sleep(std::time::Duration::from_millis(8));
+        self.window.timeout(8);
+        while !self.game.ended() {
             self.game.step();
             self.draw_ball();
             self.refresh();
+            if let Some(pancurses::Input::Character('q')) = self.window.getch() {
+                self.game.end();
+            }
         }
     }
 

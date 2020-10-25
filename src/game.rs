@@ -56,6 +56,7 @@ pub struct Frame {
 pub struct Game {
     pub frame: Frame,
     pub ball: Ball,
+    ended: bool,
 }
 
 impl Game {
@@ -70,12 +71,24 @@ impl Game {
             vert_dir: VertDir::Up,
             horiz_dir: HorizDir::Left,
         };
-        Game { frame, ball }
+        Game {
+            frame,
+            ball,
+            ended: false,
+        }
     }
 
     pub fn step(&mut self) {
         self.ball.bounce(&self.frame);
         self.ball.mv();
+    }
+
+    pub fn end(&mut self) {
+        self.ended = true;
+    }
+
+    pub fn ended(&self) -> bool {
+        self.ended
     }
 }
 
