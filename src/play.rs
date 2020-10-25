@@ -17,6 +17,7 @@ impl Drop for Curses {
 impl Curses {
     fn new(game: game::Game) -> Curses {
         let window = pancurses::initscr();
+        pancurses::noecho();
         let game::Frame { width, height } = game.frame;
         let width = width as i32;
         let height = height as i32;
