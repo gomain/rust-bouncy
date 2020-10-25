@@ -5,8 +5,7 @@ fn main() {
     match config::parse_args(args) {
         Ok(config) => {
             let game = game::Game::new(&config);
-            let window = pancurses::initscr();
-            play::Curses::play(window, game);
+            play::Curses::play(game);
         }
         Err(e) => {
             eprintln!("Error parsing arguments: {:?}", e);

@@ -8,8 +8,15 @@ pub struct Curses {
     ball_xy: Option<(u32, u32)>,
 }
 
+impl Drop for Curses {
+    fn drop(&mut self) {
+        pancurses::endwin();
+    }
+}
+
 impl Curses {
-    pub fn new(window: pancurses::Window, game: game::Game) -> Curses {
+    fn new(game: game::Game) -> Curses {
+        let window = pancurses::initscr();
         let game::Frame { width, height } = game.frame;
         let width = width as i32;
         let height = height as i32;
@@ -34,8 +41,8 @@ impl Curses {
         }
     }
 
-    pub fn play(window: pancurses::Window, game: game::Game) {
-        Self::new(window, game).run();
+    pub fn play(game: game::Game) {
+        Self::new(game).run();
     }
 
     fn draw_all(&mut self) {
