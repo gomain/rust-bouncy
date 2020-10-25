@@ -56,17 +56,7 @@ impl Curses {
     }
 
     fn draw_border(&self) {
-        let border = &self.border;
-        border.border(
-            pancurses::ACS_VLINE(),
-            pancurses::ACS_VLINE(),
-            pancurses::ACS_HLINE(),
-            pancurses::ACS_HLINE(),
-            pancurses::ACS_ULCORNER(),
-            pancurses::ACS_URCORNER(),
-            pancurses::ACS_LLCORNER(),
-            pancurses::ACS_LRCORNER(),
-        );
+        self.border.draw_box(0, 0); // 0 signifies defaults
     }
     fn draw_ball(&mut self) {
         let Curses {
